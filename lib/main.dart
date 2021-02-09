@@ -14,6 +14,11 @@ class MyApp extends StatelessWidget{
       routes: {
         LoginScreen.routename:(context)=>LoginScreen()
       },
+      theme: ThemeData(
+        primaryColor: Colors.cyan,
+        primaryColorDark: Colors.cyan[700],
+        accentColor: Colors.lightGreenAccent
+      ),
     );
   }
 
