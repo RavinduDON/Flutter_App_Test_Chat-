@@ -30,11 +30,14 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Expanded(
-                  child: Text(
-                    "Chat with your, ",
-                    textAlign: TextAlign.end,
-                    style: TextStyle(fontSize: 25.0),
+                Center(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 60.0, horizontal: 20.0),
+                    child: Text(
+                      "Chat with your, ",
+                      textAlign: TextAlign.end,
+                      style: TextStyle(fontSize: 25.0),
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -49,7 +52,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ],
-            )
+            ),
+            FlatButton(
+              color: Theme.of(context).primaryColor,
+              child: Text(
+                'Login',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: (){},
+            ),
+            OutlineButton(
+              color: Theme.of(context).accentColor,
+              splashColor: Theme.of(context).accentColor,
+              borderSide: BorderSide(
+                color: Theme.of(context).accentColor
+              ),
+              onPressed: (){},
+              child: Text('Sign Up'),
+            ),
+
           ],
         ),
       ),
