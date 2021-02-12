@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "736574308534",
+    "project_id": "alfa-chat-70257",
+    "storage_bucket": "alfa-chat-70257.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736574308534:android:89d2dfe3b527a757422617",
+        "android_client_info": {
+          "package_name": "lk.don.v1.flutter_app_practice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "736574308534-ps9k62lm1hdmj3e7s7boj4ehtmanr1g5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsfPkGV7L-BnJRDhaE_t2xA-HzAt6nvNo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "736574308534-ps9k62lm1hdmj3e7s7boj4ehtmanr1g5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
