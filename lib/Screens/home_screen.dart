@@ -24,9 +24,12 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Flexible(
-              child: Image(
-                height: 250,
-                image: AssetImage('images/Logo.png'),
+              child: Hero(
+                tag: 'logo',
+                child: Image(
+                  height: 250,
+                  image: AssetImage('images/Logo.png'),
+                ),
               ),
             ),
             Row(
@@ -72,7 +75,9 @@ class _HomeScreenState extends State<HomeScreen> {
               borderSide: BorderSide(
                 color: Theme.of(context).primaryColorDark
               ),
-              onPressed: (){},
+              onPressed: (){
+                Navigator.pushNamed(context, AuthScreen.routeName,arguments: false);
+              },
               child: Text('Sign Up'),
             ),
 

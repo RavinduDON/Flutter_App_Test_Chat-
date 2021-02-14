@@ -19,7 +19,7 @@ class _AuthScreenState extends State<AuthScreen> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: Text(widget.isLogin ? 'Login': 'Register'),
       ),
       body: Padding(
         padding:  EdgeInsets.all(kLargeMargin),
@@ -29,8 +29,11 @@ class _AuthScreenState extends State<AuthScreen> {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: Image(
-                      image: AssetImage('images/Logo.png'),
+                    child: Hero(
+                      tag: 'logo',
+                      child: Image(
+                        image: AssetImage('images/Logo.png'),
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -39,12 +42,11 @@ class _AuthScreenState extends State<AuthScreen> {
                   Expanded(
                     child: ScaleAnimatedTextKit(
                       repeatForever: true,
-                      text: [
-                        "Let's",
-                        "Login",
-                      ],
+                      text: widget.isLogin ?
+                      ["Let's", "Login",] :
+                      ["Let's", "Register"],
                       textStyle: TextStyle(
-                          fontSize: 70.0,
+                          fontSize: 50.0,
                           color: Colors.black
                       ),
                     ),
@@ -77,7 +79,8 @@ class _AuthScreenState extends State<AuthScreen> {
                   FlatButton(
                     color: Theme.of(context).primaryColor,
                     splashColor: Theme.of(context).accentColor,
-                    child: Text('Login',style: TextStyle(color: Colors.white),),
+                    child: Text(
+                      widget.isLogin ? 'Login': 'Register',style: TextStyle(color: Colors.white),),
                     onPressed: (){},
                   ),
                 ],
