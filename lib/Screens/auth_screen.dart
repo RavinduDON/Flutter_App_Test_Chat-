@@ -1,4 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_practice/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -14,6 +15,12 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
+
+  final FirebaseAuth _auth=FirebaseAuth.instance;
+  String email="";
+  String password="";
+
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -58,6 +65,9 @@ class _AuthScreenState extends State<AuthScreen> {
               height: kLargeMargin,
             ),
             TextField(
+              onChanged: (value){
+                email=value;
+              },
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 hintText: 'Email',
@@ -65,6 +75,9 @@ class _AuthScreenState extends State<AuthScreen> {
               ),
             ),
             TextField(
+              onChanged: (value){
+                password=value;
+              },
               obscureText: true,
               decoration: InputDecoration(
                 hintText: 'Password',
