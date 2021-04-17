@@ -3,7 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_practice/constants.dart';
-import 'package:flutter_app_practice/utills/alert_utill.dart';
+import 'package:flutter_app_practice/screens/group_screen.dart';
+import 'package:flutter_app_practice/utills/alert_utills.dart';
+import 'package:flutter_app_practice/utills/auth_utils.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -103,13 +105,17 @@ class _AuthScreenState extends State<AuthScreen> {
                         onPressed: () async {
                           final progress=ProgressHUD.of(context);
                           progress.showWithText(widget.isLogin ? 'Logging in' : 'Registering');
-                          try{
-                            await _auth.createUserWithEmailAndPassword(email: email, password: password);
-                          }catch(e){
-                            print(e);
-                            AlertUtill.getErrorAlert(context, e.code).show();
+                          bool isAuthSuccess;
+                          if(widget.isLogin){
+                            isAuthSuccess=await loginUser(context);
+                          }else {
+                            isAuthSuccess=await registerUser(context);
                           }
                           progress.dismiss();
+                          AuthUtils.firebaseUser=await _auth.currentUser;
+                          if(isAuthSuccess){
+                            Navigator.pushNamed(context, GroupScreen.routeName);
+                          }
                         },
                       ),
                     ],
@@ -121,5 +127,31 @@ class _AuthScreenState extends State<AuthScreen> {
         ),
       ),
     );
+  }
+
+  Future loginUser(BuildContext context) async {
+    try {
+      await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      print('Login Success');
+      return true;
+    }catch(e){
+      print(e);
+      AlertUtills.getErrorAlert(context, e.code).show();
+      return false;
+    }
+  }
+
+  Future registerUser(BuildContext context) async {
+    try{
+      await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      Navigator.pop(context);
+      print('Register Success');
+      return true;
+    }catch(e){
+      print(e);
+      AlertUtills.getErrorAlert(context, e.code).show();
+      return false;
+    }
   }
 }

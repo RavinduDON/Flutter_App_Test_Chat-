@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_practice/Screens/auth_screen.dart';
 import 'package:flutter_app_practice/Screens/home_screen.dart';
+import 'package:flutter_app_practice/screens/group_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget{
         var routes=<String, WidgetBuilder>{
           HomeScreen.routename:(context)=>HomeScreen(),
           AuthScreen.routeName:(context)=>AuthScreen(settings.arguments),
+          GroupScreen.routeName:(context)=>GroupScreen(),
         };
         WidgetBuilder builder=routes[settings.name];
         return MaterialPageRoute(builder: (ctx)=>builder(ctx));

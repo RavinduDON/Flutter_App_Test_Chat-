@@ -1,7 +1,7 @@
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:flutter/cupertino.dart';
 
-class AlertUtill{
+class AlertUtills{
   static Alert getErrorAlert(BuildContext context, String errorCode) {
     String title;
     String desc;
