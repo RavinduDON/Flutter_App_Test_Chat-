@@ -15,17 +15,18 @@ class GroupScreen extends StatefulWidget{
 }
 
 class _GroupScreenState extends State<GroupScreen>{
-  FirebaseFirestore _firestore=FirebaseFirestore.instance;
-
+  Stream<QuerySnapshot> _firestore=FirebaseFirestore.instance.collection('groups').snapshots();
+  Stream collectionStream=FirebaseFirestore.instance.collection('groups').snapshots();
   @override
   Widget build(BuildContext context) {
+    CollectionReference groups=FirebaseFirestore.instance.collection('groups');
     return Scaffold(
       appBar: AppBar(
         title: Text('Groups'),
       ),
-      body: StreamBuilder(
-        stream: _firestore.collection('groups').snapshots(),
-        builder: (context,snapshot){
+      body: StreamBuilder<QuerySnapshot>(
+        stream: groups.snapshots(),
+        builder: (BuildContext context,AsyncSnapshot <QuerySnapshot> snapshot){
           if(!snapshot.hasData) {
             return CircularProgressIndicator(
               backgroundColor: Theme
@@ -33,19 +34,26 @@ class _GroupScreenState extends State<GroupScreen>{
                   .accentColor,
             );
           }
-          final groups=snapshot.data.documents;
-          List<GroupCard> groupCards=[];
-          for(var group in groups){
-            groupCards.add(GroupCard(Group(
-              id:group.documentID,
-              name:group.data['name'],
-              tagline:group.data['tagline'],
-              imageUrl:group.data['imageUrl']
-            )));
-          }
+          // final groups=snapshot.data.;
+          // List<GroupCard> groupCards=[];
+          // for(var group in groups){
+          //   groupCards.add(GroupCard(Group(
+          //     id:group.documentID,
+          //     name:group.data['name'],
+          //     tagline:group.data['tagline'],
+          //     imageUrl:group.data['imageUrl']
+          //   )));
+          // }
           return ListView(
             padding: EdgeInsets.symmetric(horizontal: kSmallMargin,vertical: kLargeMargin),
-            children: groupCards,
+            children: snapshot.data.docs.map((DocumentSnapshot document){
+              return new GroupCard(Group(
+              id: document.id,
+              name: document.data()['name'],
+              tagline: document.data()['tagline'],
+              imageUrl: document.data()['imageUrl']
+              ));
+          }).toList(),
           );
         },
       ),
