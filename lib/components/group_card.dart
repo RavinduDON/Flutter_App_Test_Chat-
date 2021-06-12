@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_practice/models/group.dart';
+import 'package:flutter_app_practice/screens/chat_screen.dart';
 
 import '../custom_list_tile.dart';
 
@@ -17,7 +18,7 @@ class GroupCard extends StatelessWidget{
       elevation: 3,
       child: CustomListTile(
         onTap: (){
-
+          Navigator.pushNamed(context, ChatScreen.routeName,arguments: group);
         },
         title: Text(
           group.name,
